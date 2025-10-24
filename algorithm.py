@@ -11,7 +11,7 @@ class RandomAlgorithm:
     def choose(self, assignments, state: PortState):
         return random.choice(assignments)  # to choose a random assignment
 
-
+# SECAO 4.3.1 Greedy Algorithm
 class GreedyAlgorithm:
     def choose(self, assignments, state: PortState):
         best_score = None
@@ -20,6 +20,7 @@ class GreedyAlgorithm:
         for barge_id, vessel_id in assignments:
             # if a barge must go to the origin, it doesn't need to compete. we just allow it to go.
             if vessel_id == 'ORIGIN':
+                print(f'barge_id: {barge_id}, vessel_id {vessel_id}')
                 return (barge_id, vessel_id)
 
             barge_state = next(
@@ -30,11 +31,15 @@ class GreedyAlgorithm:
             remaining_time = vessel_state.vessel.departure_time - \
                 state.time  # how much time left we have to supply this vessel
             # to determine the vessel's demand/remaining_time ratio
+            # IN ORDER OF PRIORITY:
+            # (1) - We always choose the vessel with the highest “fuel demand/remaining berth time” ratio;
             fuel_ratio = vessel_state.current_fuel_demand / \
                 max(remaining_time, 1)
             # to understand if the barge has enough fuel to supply the vessel
+            # (2) - We should prioritize barges that can fully fuel the vessel;
             can_fully_supply = barge_state.current_fuel >= vessel_state.current_fuel_demand
             # to get the barge that's closest to the vessel
+            # (3) - If there is more than one barge that can fully fuel the ship, we choose the closest barge;
             distance = abs(barge_state.location -
                            vessel_state.vessel.get_position())
 
@@ -46,6 +51,7 @@ class GreedyAlgorithm:
                 # 3. more fuel if can't fully supply
                 barge_state.current_fuel if not can_fully_supply else 0,
                 -distance                     # 4. closer is better
+                # DISTANCIA NEGATIVA PARA FAZER AVALIACAO DA TUPLA
             )
 
             if best_score is None or score > best_score:
