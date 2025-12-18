@@ -7,3 +7,4 @@ bkp_*
 *.txt
 *.pickle
 __pycache__
+venv

@@ -6,7 +6,8 @@ def main():
     instances_folder = 'instances'
     os.makedirs(instances_folder, exist_ok=True)  # Ensure the output folder exists
     
-    for i in range(1000):
+    #for i in range(1000):
+    for i in range(2):  # alterado para 2 para testar - Usori 2025-12-17
         random.seed(i) 
         problem = ProblemInstance.generate()
         with open("instances/instance_%04d.json" % i, 'w') as file:
