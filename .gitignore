@@ -2,9 +2,11 @@ bkp_*
 *.pdf
 *.png
 *.gif
-*.json
+*instances*.json
 *.tex
-*.txt
+#*.txt
 *.pickle
 __pycache__
 venv
+instances
+#.devcontainer/*

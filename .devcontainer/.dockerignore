@@ -1,0 +1,32 @@
+# Controle de versão
+.git
+.gitignore
+
+# Dev Containers
+.devcontainer
+
+# Ambientes virtuais locais
+venv
+.venv
+
+# Python cache
+__pycache__/
+*.pyc
+*.pyo
+*.pyd
+
+# Backups
+bkp_*
+
+# Artefatos grandes / irrelevantes pro build
+*.pdf
+*.png
+*.gif
+*.tex
+*.pickle
+
+# Dados gerados
+instances/
+
+# IDEs / SO
+.vscode
